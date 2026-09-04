@@ -19,7 +19,6 @@ if (keystorePropertiesFile.exists()) {
 fun hasSigningVars(): Boolean {
     return providers.environmentVariable("SIGNING_KEY_ALIAS").orNull != null
             && providers.environmentVariable("SIGNING_KEY_PASSWORD").orNull != null
-            && providers.environmentVariable("SIGNING_STORE_FILE").orNull != null
             && providers.environmentVariable("SIGNING_STORE_PASSWORD").orNull != null
 }
 
@@ -54,7 +53,7 @@ android {
             register("release") {
                 keyAlias = providers.environmentVariable("SIGNING_KEY_ALIAS").get()
                 keyPassword = providers.environmentVariable("SIGNING_KEY_PASSWORD").get()
-                storeFile = file(providers.environmentVariable("SIGNING_STORE_FILE").get())
+                storeFile = rootProject.file("keystore.jks")
                 storePassword = providers.environmentVariable("SIGNING_STORE_PASSWORD").get()
             }
         } else {
